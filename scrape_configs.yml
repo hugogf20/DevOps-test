@@ -1,0 +1,4 @@
+scrape_configs:
+  - job_name: 'kafka'
+    static_configs:
+      - targets: ['cluster-kafka.dk.svc.cluster.local:<jmx-exporter-port>']

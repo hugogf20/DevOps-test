@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthcheckservice
+  labels:
+    app: healthcheckservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: healthcheckservice
+  template:
+    metadata:
+      labels:
+        app: healthcheckservice
+    spec:
+      containers:
+        - name: healthcheckservice
+          image: docker-repo/healthcheckservice:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: KAFKA_BROKER
+              value: "cluster-kafka-controller-0.cluster-kafka-controller-headless.dk.svc.cluster.local:9092"
+            - name: TOPIC

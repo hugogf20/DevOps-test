@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consumerhealthcheckservice
+  labels:
+    app: consumerhealthcheckservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consumerhealthcheckservice
+  template:
+    metadata:
+      labels:
+        app: consumerhealthcheckservice
+    spec:
+      containers:
+        - name: consumerhealthcheckservice
+          image: your-docker-repo/consumerhealthcheckservice:latest
+          ports:
+            - containerPort: 80
+          env:
+            - name: KAFKA_BROKER
+              value: "cluster-kafka-controller-0.cluster-kafka-controller-headless.dk.svc.cluster.local:9092"
+            - name: GROUP_ID
+              value: "health_check_group"
+            - name: TOPIC
+              value: "health_checks_topic"

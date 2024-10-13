@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consumer-config
+  namespace: dk
+data:
+  KAFKA_BROKER: "cluster-kafka-controller-0.cluster-kafka-controller-headless.dk.svc.cluster.local:9092"
+  GROUP_ID: "health_check_group"
+  TOPIC: "dr
